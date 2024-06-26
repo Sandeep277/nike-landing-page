@@ -2,13 +2,19 @@ import { arrowRight } from "../assets/icons";
 import { bigShoe1 } from "../assets/images";
 import Button from "../components/Button";
 import { shoes, statistics } from "../constants";
+import ShoeCard from "../components/ShoeCard";
+
+import { useState } from "react";
 
 const Hero = () => {
+
+  const[bigShoeImg, setBigShoeImg] = useState(bigShoe1)
+
   return (
     <section
       id="home"
       className="w-full flex xl:flex-row flex-col 
-      justify-center min-h-screen gap-10 max-containr"
+      justify-center min-h-screen gap-10 max-container"
     >
       <div
         className="relative 
@@ -40,7 +46,7 @@ const Hero = () => {
           Discver stylish Nike arrivals, quality comfort, and innovation for
           your active life.
         </p>
-        <Button label="show now" iconUrl={arrowRight} />
+        <Button label="show now" iconURL={arrowRight} />
         <div
           className="flex 
         justify-start items-start flex-wrap w-full mt-20 gap-16"
@@ -56,20 +62,34 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="relative flex-1 flex justify-center items-center 
-      xl:min-h-screen max-xl:py-14 bg-primary 
-      bg-cover bg-center">
+      <div
+        className="relative flex-1 flex justify-center items-center 
+      xl:min-h-screen max-xl:py-40 bg-primary 
+      bg-cover bg-center"
+      >
         <img
-         className="object-contain relative z-10"
-         src={bigShoe1} width={610} height={500} alt="shoe" />
-      </div>
+          className="object-contain relative z-10"
+          src={bigShoeImg}
+          width={610}
+          height={500}
+          alt="shoe"
+        />
 
-      <div>
-        {shoes.map((shoe, index) => (
-          <div key={index}>
-            
-          </div>
-        ))}
+        <div
+          className="flex sm:gap-6 gap-4 
+      absolute -bottom-[5%] sm:left=[10%] max-sm:px-6"
+        >
+          {shoes.map((shoe, index) => (
+            <div key={index}>
+              <ShoeCard
+                index={index}
+                imgURL={shoe}
+                changeBigShoeImage={(shoe) => setBigShoeImg(shoe)}
+                bigShoeImg={bigShoeImg}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
